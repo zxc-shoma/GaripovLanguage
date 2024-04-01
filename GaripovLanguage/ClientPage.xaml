@@ -1,0 +1,69 @@
+﻿<Page x:Class="GaripovLanguage.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GaripovLanguage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientPage">
+
+    <Grid>
+        <ListView Name="ClientListview" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ClientListview_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Width="200" Height="200"  Grid.Column="0"  HorizontalAlignment="Center">
+                            <Image.Source>
+                                <Binding Path="PhotoPath">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            res/picture.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <TextBlock FontSize="20"><Run Text="Идентификатор: "/><Run Text="{Binding ID}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Имя: "/><Run Text="{Binding FirstName}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Фамилия: "/><Run Text="{Binding LastName}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Отчество: "/><Run Text="{Binding Patronymic}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Дата рождения: "/><Run Text="{Binding Birthday}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Телефон: "/><Run Text="{Binding Phone}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Электронная почта: "/><Run Text="{Binding Email}"/></TextBlock>
+                            <TextBlock FontSize="20"><Run Text="Дата регистрации: "/><Run Text="{Binding RegistrationDate}"/></TextBlock>
+                            <TextBlock FontSize="20" Text="Количество посещений:"></TextBlock>
+                            <TextBlock FontSize="20" Text="{Binding count}"></TextBlock>
+                            <TextBlock FontSize="20" Text="Дата последнего посещения:"></TextBlock>
+                            <TextBlock FontSize="20" Text="{Binding last}"></TextBlock>
+                                
+                        </StackPanel>
+
+
+
+
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+    </Grid>
+</Page>
