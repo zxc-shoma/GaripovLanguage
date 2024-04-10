@@ -172,16 +172,6 @@
     <Resource Include="res\school_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GaripovModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GaripovModel.Context.cs</LastGenOutput>
-      <DependentUpon>GaripovModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="GaripovModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GaripovModel.edmx</DependentUpon>
-      <LastGenOutput>GaripovModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Клиенты\1.jpg" />
     <Resource Include="Клиенты\10.jpg" />
     <Resource Include="Клиенты\11.jpg" />
@@ -286,6 +276,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GaripovModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GaripovModel.edmx</DependentUpon>
+      <LastGenOutput>GaripovModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="GaripovModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GaripovModel.edmx</DependentUpon>
+      <LastGenOutput>GaripovModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,7 +15,6 @@ namespace GaripovLanguage
     
     public partial class LanguageEntities : DbContext
     {
-
         private static LanguageEntities _context;
         public static LanguageEntities GetContext()
         {

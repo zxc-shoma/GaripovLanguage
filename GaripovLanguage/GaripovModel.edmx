@@ -22,7 +22,7 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
           <Property Name="Birthday" Type="date" />
-          <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+          <Property Name="RegistrationDate" Type="date" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="GenderCode" Type="nchar" MaxLength="1" Nullable="false" />
@@ -35,7 +35,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="StartTime" Type="date" Nullable="false" />
           <Property Name="Comment" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DocumentByService">
@@ -97,7 +97,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Cost" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DurationInSeconds" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Discount" Type="float" />
@@ -364,7 +364,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Birthday" Type="DateTime" Precision="0" />
-          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GenderCode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
@@ -380,7 +380,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Client" Relationship="Self.FK_ClientService_Client" FromRole="ClientService" ToRole="Client" />
           <NavigationProperty Name="Service" Relationship="Self.FK_ClientService_Service" FromRole="ClientService" ToRole="Service" />
@@ -457,7 +457,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DurationInSeconds" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Double" />
