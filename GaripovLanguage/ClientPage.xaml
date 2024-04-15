@@ -5,15 +5,49 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GaripovLanguage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClientPage">
+      d:DesignHeight="450" d:DesignWidth="900"
+      Title="ClientPage" FontFamily="Comic Sans MS">
 
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+
+        <Rectangle Grid.Row="0" Fill="#e7fabf" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,0,10,0">
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <TextBlock Text="Введи данные для поиска" FontSize="18"></TextBlock>
+                <TextBlock Text="Выберите пол для фильтра" FontSize="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
+                <TextBox Name="TBSearch" Width="200" TextChanged="TBSearch_TextChanged"></TextBox>
+                <ComboBox Name="FiltrBox" Width="75" SelectionChanged="FiltrBox_SelectionChanged" FontSize="18">
+                    <TextBlock Text="Все"/>
+                    <TextBlock Text="Женский"/>
+                    <TextBlock Text="Мужской"/>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                <ComboBox Name="SortBox" Width="275" SelectionChanged="SortBox_SelectionChanged" FontSize="18">
+                    <TextBlock>По умолчанию</TextBlock>
+                    <TextBlock>От А до Я</TextBlock>
+                    <TextBlock>по дате последнего посещения</TextBlock>
+                    <TextBlock>по количеству посещений</TextBlock>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+
+
+
+
         <ListView Grid.Row="1" Name="ClientListview" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ClientListview_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -25,7 +59,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
-                            
+
 
                         </Grid.RowDefinitions>
 
@@ -43,28 +77,28 @@
 
 
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                            <TextBlock FontSize="20" Text="{Binding ID, StringFormat='Идентификатор: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding FirstName, StringFormat='Имя: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding LastName, StringFormat='Фамилия: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding Patronymic, StringFormat='Отчество: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding Birthday, StringFormat='Дата рождения: {0:dd.MM.yyyy}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding Phone, StringFormat='Телефон: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding Email, StringFormat='Электронная почта: {0}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding RegistrationDate, StringFormat='Дата регистрации: {0:dd.MM.yyyy}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding last, StringFormat='Дата последнего посещения: {0:dd.MM.yyyy}'}"/>
-                            <TextBlock FontSize="20" Text="{Binding count, StringFormat='Количество посещений: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding ID, StringFormat='Идентификатор: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding FirstName, StringFormat='Имя: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding LastName, StringFormat='Фамилия: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding Patronymic, StringFormat='Отчество: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding Birthday, StringFormat='Дата рождения: {0:dd.MM.yyyy}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding Phone, StringFormat='Телефон: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding Email, StringFormat='Электронная почта: {0}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding RegistrationDate, StringFormat='Дата регистрации: {0:dd.MM.yyyy}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding last, StringFormat='Дата последнего посещения: {0:dd.MM.yyyy}'}"/>
+                            <TextBlock FontSize="16" Text="{Binding count, StringFormat='Количество посещений: {0}'}"/>
 
 
 
 
                         </StackPanel>
                         <Button Name="delButton" Content="Удалить" FontSize="20" Grid.Column="2" VerticalAlignment="Center" Click="delButton_Click"/>
-                       
-                            
-                           
-                            
-                      
-                        
+
+
+
+
+
+
 
 
 
@@ -77,7 +111,7 @@
         </ListView>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" >
             <TextBlock Text="Выводить по "/>
-            <ComboBox Name="strCount" Width="100" SelectionChanged="strCount_SelectionChanged">
+            <ComboBox Name="ComboBox" Width="100" SelectionChanged ="ComboBox_SelectionChanged">
                 <TextBlock>10</TextBlock>
                 <TextBlock>50</TextBlock>
                 <TextBlock>200</TextBlock>

@@ -36,8 +36,12 @@ namespace GaripovLanguage
         {
             get
             {
-                if (count == 0) return "нет посещений";
-                else return ClientService.ToList().OrderByDescending(p => p.StartTime).First().StartTime.ToShortDateString();
+                if (ClientService.Count!=0)
+                  return ClientService.ToList().OrderByDescending(p => p.StartTime).First().StartTime.ToShortDateString();
+                
+                else return null;
+                
+                
 
 
             }

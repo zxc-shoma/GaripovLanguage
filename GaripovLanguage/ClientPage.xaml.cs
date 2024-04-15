@@ -31,7 +31,12 @@ namespace GaripovLanguage
         {
             InitializeComponent();
             var currentClient = LanguageEntities.GetContext().Client.ToList();
+            //ChangePage(0, 0);
             
+            ComboBox.SelectedIndex = 0;
+            FiltrBox.SelectedIndex = 0;
+            SortBox.SelectedIndex = 0;
+            Update();
 
             //var currentClientService = LanguageEntities.GetContext().ClientService.ToList();
             //var clientIds = currentClient.Select(c => c.ID).ToList();
@@ -43,6 +48,7 @@ namespace GaripovLanguage
 
 
             ClientListview.ItemsSource = currentClient; 
+
             
         }
         private void ChangePage(int direction, int? selectedPage)
@@ -122,8 +128,7 @@ namespace GaripovLanguage
                     PageListBox.SelectedIndex = CurrentPage;
 
                     min = CurrentPage * CountInPage + CountInPage < CountRecords ? CurrentPage * CountInPage + CountInPage : CountRecords;
-                    TBCount.Text = min.ToString();
-                    TBAllRecords.Text = CountRecords.ToString();
+                    //TBAllRecords.Text = CountRecords.ToString();
 
                     ClientListview.ItemsSource = CurrentPageList;
 
@@ -139,31 +144,86 @@ namespace GaripovLanguage
         public void Update()
         {
             var currentClient = LanguageEntities.GetContext().Client.ToList();
+            var currentClientService = LanguageEntities.GetContext().ClientService.ToList();
             TBAllRecords.Text = LanguageEntities.GetContext().Client.ToList().Count().ToString();
             TBCount.Text = currentClient.Count().ToString();
 
-            ClientListview.ItemsSource = currentClient;
+            
 
+            if (FiltrBox.SelectedIndex ==0)
+            {
+                currentClient = currentClient.ToList(); 
+            }
+
+            if (FiltrBox.SelectedIndex == 1)
+            {
+                currentClient = currentClient.Where(p => p.GenderCode == "ж").ToList();
+            }
+            else if (FiltrBox.SelectedIndex == 2)
+            {
+                currentClient = currentClient.Where(p => p.GenderCode == "м").ToList();
+            }
+
+            currentClient = currentClient.Where(p => p.LastName.ToLower().Contains(TBSearch.Text.ToLower()) || p.FirstName.ToLower().Contains(TBSearch.Text.ToLower()) || p.Patronymic.ToLower().Contains(TBSearch.Text.ToLower()) || p.Email.ToLower().Contains(TBSearch.Text.ToLower()) || p.Phone.Replace("+", "").Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").ToLower().Contains(TBSearch.Text.Replace("+", "").Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").ToLower())).ToList();
+
+            
+
+          
+
+
+
+
+            if (SortBox.SelectedIndex == 0)
+            {
+                currentClient = currentClient.ToList();
+            }
+
+            if (SortBox.SelectedIndex == 1)
+            {
+                currentClient = currentClient.OrderBy(p => p.LastName).ToList();
+            }
+            else if (SortBox.SelectedIndex == 2)
+            {
+                
+                 currentClient = currentClient.OrderByDescending(p => p.last).ToList();
+
+                
+                
+            }
+            else if (SortBox.SelectedIndex == 3)
+            {
+                currentClient = currentClient.OrderByDescending(p => p.count).ToList();
+            }
+
+            ClientListview.ItemsSource = currentClient;
+            TBCount.Text = currentClient.Count.ToString();
             TableList = currentClient;
-            if (strCount.SelectedIndex == 0)
+
+            //ChangePage(0, 0);
+
+            if (ComboBox.SelectedIndex == 0)
             {
                 CountInPage = 10;
+
             }
-            else if (strCount.SelectedIndex == 1)
+            else if (ComboBox.SelectedIndex == 1)
             {
                 CountInPage = 50;
+
             }
-            else if (strCount.SelectedIndex == 2)
+            else if (ComboBox.SelectedIndex == 2)
             {
                 CountInPage = 200;
+
             }
-            else if (strCount.SelectedIndex == 3)
+            else if (ComboBox.SelectedIndex == 3)
             {
                 CountInPage = 0;
             }
-
-
             ChangePage(0, 0);
+           
+
+            
         }
 
 
@@ -183,26 +243,28 @@ namespace GaripovLanguage
 
         }
 
-        private void strCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Update();
-
-        }
+        
 
         private void LeftDirButton_Click(object sender, RoutedEventArgs e)
         {
             ChangePage(1, null);
+            
+            
 
         }
 
         private void RightDirButton_Click(object sender, RoutedEventArgs e)
         {
             ChangePage(2, null);
+          
+            
         }
 
         private void PageListBox_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ChangePage(0, Convert.ToInt32(PageListBox.SelectedItem.ToString()) - 1);
+            
+            
         }
 
         private void delButton_Click(object sender, RoutedEventArgs e)
@@ -223,6 +285,27 @@ namespace GaripovLanguage
             {
                 MessageBox.Show("Невозможно выполнить удаление, так как клиент посещал школу!");
             }
+
+        }
+
+        private void FiltrBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void SortBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
 
         }
     }
