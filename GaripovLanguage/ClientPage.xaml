@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="900"
       Title="ClientPage" FontFamily="Comic Sans MS">
 
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -41,6 +41,8 @@
                     <TextBlock>по дате последнего посещения</TextBlock>
                     <TextBlock>по количеству посещений</TextBlock>
                 </ComboBox>
+
+                <Button Content="Добавить клиента" Name="AddClient" Click="AddClient_Click" HorizontalAlignment="Right" Width="200"></Button>
             </StackPanel>
         </StackPanel>
 
@@ -48,7 +50,8 @@
 
 
 
-        <ListView Grid.Row="1" Name="ClientListview" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ClientListview_SelectionChanged">
+
+        <ListView Grid.Row="1" Name="ClientListview" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ClientListview_SelectionChanged" IsVisibleChanged="ClientListview_IsVisibleChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -93,6 +96,7 @@
 
                         </StackPanel>
                         <Button Name="delButton" Content="Удалить" FontSize="20" Grid.Column="2" VerticalAlignment="Center" Click="delButton_Click"/>
+                        <Button Name="editButton" Content="Редактировать" FontSize="20" Grid.Column="2"   VerticalAlignment="Top" Click="editButton_Click" Margin="5,140,5,0"/>
 
 
 

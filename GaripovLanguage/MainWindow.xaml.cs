@@ -26,5 +26,11 @@ namespace GaripovLanguage
             MainFrame.Navigate(new ClientPage());
             Manager.MainFrame = MainFrame;
         }
+
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+           
+
+        }
     }
 }

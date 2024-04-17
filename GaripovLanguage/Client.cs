@@ -21,31 +21,18 @@ namespace GaripovLanguage
             this.ClientService = new HashSet<ClientService>();
             this.Tag = new HashSet<Tag>();
         }
-    
-        public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public System.DateTime RegistrationDate { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string GenderCode { get; set; }
-        public string PhotoPath { get; set; }
         public string last
         {
             get
             {
-                if (ClientService.Count!=0)
-                  return ClientService.ToList().OrderByDescending(p => p.StartTime).First().StartTime.ToShortDateString();
-                
-                else return null;
-                
-                
-
-
+                if (count != 0)
+                {
+                    return ClientService.ToList().OrderByDescending(p => p.StartTime).First().StartTime.ToShortTimeString();
+                }
+                else { return null; }
             }
         }
+
         public int count
         {
             get
@@ -54,6 +41,17 @@ namespace GaripovLanguage
             }
         }
 
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Patronymic { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<System.DateTime> RegistrationDate { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string GenderCode { get; set; }
+        public string PhotoPath { get; set; }
+    
         public virtual Gender Gender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientService> ClientService { get; set; }

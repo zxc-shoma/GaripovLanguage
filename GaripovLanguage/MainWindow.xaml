@@ -18,6 +18,6 @@
 
 
         <Image Source="res/school_logo.png" HorizontalAlignment="Left"/>
-        <Frame Name="MainFrame" Grid.Row="1"></Frame>
+        <Frame Name="MainFrame" Grid.Row="1" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
 
+
 namespace GaripovLanguage
 {
     /// <summary>
@@ -30,27 +31,33 @@ namespace GaripovLanguage
         public ClientPage()
         {
             InitializeComponent();
-            var currentClient = LanguageEntities.GetContext().Client.ToList();
+            List<Client> currentClient = LanguageEntities.GetContext().Client.ToList();
             //ChangePage(0, 0);
-            
+
             ComboBox.SelectedIndex = 0;
             FiltrBox.SelectedIndex = 0;
             SortBox.SelectedIndex = 0;
-            Update();
+
+            //TBAllRecords.Text = LanguageEntities.GetContext().Client.ToList().Count().ToString();
 
             //var currentClientService = LanguageEntities.GetContext().ClientService.ToList();
             //var clientIds = currentClient.Select(c => c.ID).ToList();
             //var x = currentClientService.Where(p => clientIds.Contains(p.ClientID)).ToList();
 
+            Update();
+
+            ClientListview.ItemsSource = LanguageEntities.GetContext().Client.ToList();
 
 
-
-
-
-            ClientListview.ItemsSource = currentClient; 
-
+           
             
+            ClientListview.Items.Refresh();
+            
+
+
         }
+       
+
         private void ChangePage(int direction, int? selectedPage)
         {
             CurrentPageList.Clear();
@@ -128,7 +135,7 @@ namespace GaripovLanguage
                     PageListBox.SelectedIndex = CurrentPage;
 
                     min = CurrentPage * CountInPage + CountInPage < CountRecords ? CurrentPage * CountInPage + CountInPage : CountRecords;
-                    //TBAllRecords.Text = CountRecords.ToString();
+                    TBAllRecords.Text = CountRecords.ToString();
 
                     ClientListview.ItemsSource = CurrentPageList;
 
@@ -145,7 +152,7 @@ namespace GaripovLanguage
         {
             var currentClient = LanguageEntities.GetContext().Client.ToList();
             var currentClientService = LanguageEntities.GetContext().ClientService.ToList();
-            TBAllRecords.Text = LanguageEntities.GetContext().Client.ToList().Count().ToString();
+            
             TBCount.Text = currentClient.Count().ToString();
 
             
@@ -235,6 +242,7 @@ namespace GaripovLanguage
         private void ClientListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Update();
+            ClientListview.Items.Refresh();
         }
 
         private void PageListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -307,6 +315,35 @@ namespace GaripovLanguage
         {
             Update();
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddClient_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddEditPage(null));
+            Update();
+            
+        }
+
+        private void editButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Client));
+            Update();
+
+        }
+
+        private void ClientListview_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                LanguageEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                ClientListview.ItemsSource = LanguageEntities.GetContext().Client.ToList();
+                Update();
+            }
         }
     }
 }
